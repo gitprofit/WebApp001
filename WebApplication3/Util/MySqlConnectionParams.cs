@@ -11,17 +11,17 @@ namespace WebApplication3.Util
 		public string Port;
 		public string Username;
 		public string Password;
-		public string SID;
+		public string Database;
 
 		public string ConnectionString
 		{
 			get
 			{
 				return
-					"Data Source=" + Host + ":" + Port + "/" + SID + ";" +
-					"User Id=" + Username + ";" +
-					"Password=" + Password + ";" +
-					"Integrated Security=no;";
+						"server=" + Host + ";" +
+						"User Id=" + Username + ";" +
+						"Password=" + Password + ";" +
+						"database=" + Database;
 			}
 			private set { }
 		}
