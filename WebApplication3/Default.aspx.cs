@@ -5,13 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using Oracle.DataAccess.Client;
 
 namespace WebApplication3
 {
 	public partial class Default : System.Web.UI.Page
 	{
-		private OracleConnection connection;
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -30,8 +28,6 @@ namespace WebApplication3
 			para.Username = "APEX_PUBLIC_USER";
 			//
 			para.Password = "Root123!";
-
-			connection = new OracleConnection(para.ConnectionString);
 		}
 	}
 }
