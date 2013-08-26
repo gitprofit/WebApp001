@@ -26,7 +26,7 @@ namespace WebApplication3
 			para.Port = "1521";
 			para.SID = "orcl";
 			para.Username = "APEX_PUBLIC_USER";
-			//
+			// kurwa mac
 			para.Password = "Root123!";
 		}
 	}
