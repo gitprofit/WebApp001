@@ -20,7 +20,7 @@ namespace WebApplication3
 
 		protected void InitPage()
 		{
-			var para = new Util.OracleConnectionParams();
+			var para = new Util.MySqlConnectionParams();
 
 			para.Host = "st-2013-130.staz.comarch";
 			para.Port = "1521";
