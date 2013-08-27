@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication3.Util
 {
-	public class OracleConnectionParams
+	public class ConnectionParams
 	{
 		public string Host;
 		public string Port;
