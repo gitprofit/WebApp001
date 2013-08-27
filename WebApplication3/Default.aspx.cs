@@ -8,6 +8,9 @@ using MySql.Data;
 using System.Data.Common;
 using System.Data;
 
+using WebApplication3.Model.Northwind;
+using System.Configuration;
+
 namespace WebApplication3
 {
 	public partial class Default : System.Web.UI.Page
@@ -18,11 +21,35 @@ namespace WebApplication3
 		{
 			if (!IsPostBack) InitPage();
 
+			Test2();
+		}
+
+		protected void InitPage()
+		{
+			connectionString = ConfigurationManager.ConnectionStrings["MySqlConn"].ConnectionString;
+		}
+
+		private void Test2()
+		{
+			NorthwindContext north = new NorthwindContext(connectionString);
+			//north.
+			var suppliers = from Supplier in north.Suppliers select Supplier;
+
+			foreach (var s in suppliers)
+			{
+				Response.Write(s.ContactName + ", " + s.CompanyName + ", " + s.City + "<br />");
+			}
+
+			north.Dispose();
+		}
+
+		private void Test1()
+		{
 			var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
 			conn.Open();
 
 			var cmd = conn.CreateCommand();
-			cmd.CommandText = "SELECT * from TestTab";
+			cmd.CommandText = "select * from customers";
 
 			var rdr = cmd.ExecuteReader();
 
@@ -42,19 +69,6 @@ namespace WebApplication3
 			cmd.Dispose();
 			conn.Close();
 			conn.Dispose();
-		}
-
-		protected void InitPage()
-		{
-			var para = new Util.MySqlConnectionParams();
-
-			para.Host = "mysql.agh.edu.pl";
-			para.Port = "3306";
-			para.Database = "liszcz1";
-			para.Username = "liszcz1";
-			para.Password = "4Zs7NG95";
-
-			connectionString = para.ConnectionString;
 		}
 	}
 }

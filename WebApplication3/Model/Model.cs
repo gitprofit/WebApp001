@@ -1,30 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Web;
 
+// http://beniaminzaborski.wordpress.com/tag/entity-framework-code-first/
+
 namespace WebApplication3.Model
 {
-	public class Term
+	namespace Northwind
 	{
-		public int TermId { get; set; }
-		public int Start { get; set; }
-		public int End { get; set; }
-	}
 
-	public class Course
-	{
-		public int CourseId { get; set; }
-		public virtual ICollection<Term> Terms { get; set; }
-	}
-
-	public class ModelContext : DbContext
-	{
-		ModelContext(string connStr)
-			: base(connStr)
+		public class NorthwindContext : DbContext
 		{
-			// http://beniaminzaborski.wordpress.com/tag/entity-framework-code-first/
+			public DbSet<Supplier> Suppliers { get; set; }
+			public DbSet<Product> Products { get; set; }
+			public DbSet<Category> Categories { get; set; }
+
+			public NorthwindContext(string connStr)
+				: base(connStr)
+			{ }
+
+			protected override void OnModelCreating(DbModelBuilder modelBuilder)
+			{
+				base.OnModelCreating(modelBuilder);
+
+				modelBuilder.Configurations.Add(new SupplierMapping());
+				modelBuilder.Configurations.Add(new ProductMapping());
+				modelBuilder.Configurations.Add(new CategoryMapping());
+			}
 		}
 	}
 }
