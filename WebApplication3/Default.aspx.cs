@@ -33,7 +33,9 @@ namespace WebApplication3
 		{
 			NorthwindContext north = new NorthwindContext(connectionString);
 			//north.
-			var suppliers = from Supplier in north.Suppliers select Supplier;
+			var suppliers = from Supplier in north.Suppliers
+							where Supplier.ContactName.Contains("Mackenzie")
+							select new { Supplier.ContactName, Supplier.CompanyName, Supplier.City };
 
 			foreach (var s in suppliers)
 			{
