@@ -12,8 +12,8 @@ namespace WebApplication3.Model.Northwind
 		public string ProductName { get; set; }
 		public int QuantityPerUnit { get; set; }
 
-		//public Supplier Supplier { get; set; }
-		//public Category Category { get; set; }
+		public Supplier Supplier { get; set; }
+		public Category Category { get; set; }
 	}
 
 	class ProductMapping : EntityTypeConfiguration<Product>
@@ -26,8 +26,8 @@ namespace WebApplication3.Model.Northwind
 			this.Property(t => t.ProductName).HasColumnName("ProductName");
 			this.Property(t => t.QuantityPerUnit).HasColumnName("QuantityPerUnit");
 
-			//this.HasOptional(t => t.Supplier).WithMany().Map(t => t.MapKey("SupplierID"));
-			//this.HasOptional(t => t.Category).WithMany().Map(t => t.MapKey("CategoryID"));
+			this.HasOptional(t => t.Supplier).WithMany().Map(t => t.MapKey("SupplierID"));
+			this.HasOptional(t => t.Category).WithMany().Map(t => t.MapKey("CategoryID"));
 
 			this.ToTable("products");
 		}

@@ -32,20 +32,46 @@ namespace WebApplication3
 		private void Test2()
 		{
 			NorthwindContext north = new NorthwindContext(connectionString);
-			//north.
+
 			var suppliers = from Supplier in north.Suppliers
 							where Supplier.ContactName.Contains("Mackenzie")
 							select new { Supplier.ContactName, Supplier.CompanyName, Supplier.City };
+
+			var sup2 = (from Product in north.Products where Product.Supplier.Country=="Norway" select Product.Supplier).OrderBy(t => t.Country).Take(3);
+
+			var prod3 = north.Products.Select(t => new { t.ProductID, t.ProductName, t.Supplier }).Where(t => t.Supplier == sup2.FirstOrDefault());
+
+			//var bev = from Category in north.Categories where Category.CategoryName == "Beverages" select Category.Products;
+			var bev2 = from Product in north.Products where Product.Category.CategoryName == "Beverages" select Product;
 
 			foreach (var s in suppliers)
 			{
 				Response.Write(s.ContactName + ", " + s.CompanyName + ", " + s.City + "<br />");
 			}
 
+			Response.Write("<br /><br />");
+
+			foreach (var s in sup2)
+			{
+				Response.Write(s.ContactName + ", " + s.Country + "<br />");
+			}
+
+			Response.Write("<br /><br />");
+
+			foreach (var s in prod3)
+			{
+				Response.Write(s.ProductID + ", " + s.ProductName + "<br />");
+			}
+
+			Response.Write("<br />bev1<br />");
+			//foreach (var s in bev2)
+			//	Response.Write(s.ProductName + ", ");
+
+
 			north.Dispose();
 		}
 
-		private void Test1()
+		private void TestADO()
 		{
 			var conn = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
 			conn.Open();
