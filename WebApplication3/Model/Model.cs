@@ -20,7 +20,9 @@ namespace WebApplication3.Model
 
 			public NorthwindContext(string connStr)
 				: base(connStr)
-			{ }
+			{
+				Database.SetInitializer<NorthwindContext>(null);
+			}
 
 			protected override void OnModelCreating(DbModelBuilder modelBuilder)
 			{

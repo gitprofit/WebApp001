@@ -39,10 +39,10 @@ namespace WebApplication3
 
 			var sup2 = (from Product in north.Products where Product.Supplier.Country=="Norway" select Product.Supplier).OrderBy(t => t.Country).Take(3);
 
-			var prod3 = north.Products.Select(t => new { t.ProductID, t.ProductName, t.Supplier }).Where(t => t.Supplier == sup2.FirstOrDefault());
+			//var prod3 = north.Products.Select(t => new { t.ProductID, t.ProductName, t.Supplier }).Where(t => t.Supplier == sup2.FirstOrDefault());
 
 			//var bev = from Category in north.Categories where Category.CategoryName == "Beverages" select Category.Products;
-			var bev2 = from Product in north.Products where Product.Category.CategoryName == "Beverages" select Product;
+			//var bev2 = from Product in north.Products where Product.Category.CategoryName == "Beverages" select Product;
 
 			foreach (var s in suppliers)
 			{
@@ -58,15 +58,19 @@ namespace WebApplication3
 
 			Response.Write("<br /><br />");
 
+			/*
 			foreach (var s in prod3)
 			{
 				Response.Write(s.ProductID + ", " + s.ProductName + "<br />");
 			}
 
 			Response.Write("<br />bev1<br />");
-			//foreach (var s in bev2)
-			//	Response.Write(s.ProductName + ", ");
+			if (bev2 == null) Response.Write("null bev!");
+ 			else
+			foreach (var s in bev2)
+				Response.Write(s.ProductName + ", ");
 
+			*/
 
 			north.Dispose();
 		}
